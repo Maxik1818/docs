@@ -26,25 +26,59 @@ On github.com (works fine on a phone):
 4. **Do not** add a README, .gitignore, or license — leave it completely empty
 5. **Create repository**
 
-## Step 2 — tell me, in a session on this repo
+## Step 2 — copy this folder into it
 
-Say: **"the private workspace repo exists, move the workspace into it"**
-
-I'll then run, essentially:
+A Claude session can only reach repos attached to it, and attaching a brand-new repo
+needs an approval that isn't always available — so **the reliable path is to run this
+yourself on the PC.** Paste the whole block into a terminal:
 
 ```bash
+# 1. get the staged workspace out of the public docs repo
+git clone --branch claude/cross-device-project-storage-mq98q3 \
+  https://github.com/Maxik1818/docs.git /tmp/docs-staged
+
+# 2. copy it into a clone of the new private repo
 git clone https://github.com/Maxik1818/workspace.git ~/workspace
-cp -r /path/to/docs/workspace/. ~/workspace/
+cp -r /tmp/docs-staged/workspace/. ~/workspace/
+
+# 3. first commit
 cd ~/workspace
-rm MIGRATE.md                      # this file has served its purpose
+rm MIGRATE.md                     # this file has served its purpose
 git add -A
 git commit -m "workspace: thoughts, prompts, results, decisions"
 git branch -M main
 git push -u origin main
+
+# 4. tidy up
+rm -rf /tmp/docs-staged
 ```
 
-That's it — the folder is deliberately a **complete repo root**, so it's a straight
+The `cp -r <src>/. <dst>/` form (note the trailing `/.`) copies hidden files too —
+`.claude/`, `.gitattributes`, `.gitignore` are all essential and would be silently
+skipped by `cp -r <src>/* <dst>/`.
+
+That's it — this folder is deliberately a **complete repo root**, so it's a straight
 copy with nothing to rewire. `.claude/workspace-branch` already says `main`.
+
+**Verify before trusting it:**
+
+```bash
+cd ~/workspace
+git ls-files | wc -l                                   # expect 25
+git ls-files -s .claude/hooks .claude/scripts          # all three must be 100755
+git check-attr merge -- projects/smile-flow/log.md     # must say: union
+```
+
+If any script is `100644` instead of `100755`, the hook will silently never run. Fix:
+`chmod +x .claude/hooks/*.sh .claude/scripts/*.sh && git add -A && git commit -m "fix modes" && git push`
+
+### Alternative: let a Claude session do it
+
+Start a session **on `Maxik1818/workspace`** and say *"attach Maxik1818/docs and copy
+the workspace folder from branch claude/cross-device-project-storage-mq98q3 into this
+repo root"*. Approve the repo-attach prompt when it appears. This works because the
+docs repo is already authorized on the account; attaching a freshly created repo is the
+part that gets blocked.
 
 If a session can't reach the new repo, it needs attaching first — `add_repo` with
 owner `Maxik1818`, repo `workspace`, access `push`.
