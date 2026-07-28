@@ -1,0 +1,15 @@
+# Never commit raw session transcripts — they routinely contain API keys.
+*.jsonl
+
+# Secrets
+.env
+.env.*
+*.pem
+*.key
+
+# Machine-local Claude settings (device-specific, not shared)
+.claude/settings.local.json
+
+# OS noise
+.DS_Store
+Thumbs.db

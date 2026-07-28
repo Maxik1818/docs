@@ -1,0 +1,9 @@
+# Append-only files: let git keep BOTH sides when two devices write at once.
+# `union` is a built-in git merge driver — nothing to install on either machine.
+# This is what makes one log file per project safe across phone and PC.
+log.md            merge=union
+log-archive-*.md  merge=union
+inbox.md          merge=union
+**/prompts/*.md   merge=union
+
+# README.md is deliberately NOT union — it's a rewritten summary, not a stream.
