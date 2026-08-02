@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>העלאת תמונות + שליחה ב-WhatsApp — דמו</title>
+<style>
+  :root { color-scheme: light dark; --bg:#f6f7f9; --card:#fff; --fg:#111827; --muted:#6b7280; --border:#e5e7eb; }
+  @media (prefers-color-scheme:dark){ :root{ --bg:#0b1220; --card:#111827; --fg:#f3f4f6; --muted:#9ca3af; --border:#374151; } }
+  * { box-sizing:border-box }
+  body { margin:0; padding:24px 16px 64px; background:var(--bg); color:var(--fg);
+         font-family:system-ui,-apple-system,"Segoe UI",Rubik,Arial,sans-serif; line-height:1.6; }
+  .wrap { max-width:720px; margin:0 auto }
+  h1 { font-size:24px; margin:0 0 4px }
+  .sub { color:var(--muted); margin:0 0 24px; font-size:14px }
+  .card { background:var(--card); border:1px solid var(--border); border-radius:16px; padding:20px; margin-bottom:16px }
+  .card > h2 { font-size:16px; margin:0 0 14px }
+  .row { margin-bottom:14px }
+  .row label { display:block; font-size:13px; font-weight:600; margin-bottom:5px }
+  .row input, .row select { width:100%; font:inherit; font-size:14px; padding:9px 11px;
+         border-radius:10px; border:1px solid var(--border); background:transparent; color:inherit }
+  .submit { font:inherit; font-size:15px; font-weight:600; padding:11px 24px; border-radius:10px;
+         border:0; background:#2563eb; color:#fff; cursor:pointer }
+  pre { background:#0002; padding:12px; border-radius:10px; overflow-x:auto; font-size:12px; margin:0 }
+  code { font-family:ui-monospace,SFMono-Regular,Menlo,monospace }
+</style>
+</head>
+
+<!-- data-enhance-file-inputs: כל input[type=file][accept*=image] קיים בדף יקבל אוטומטית
+     צילום מהמצלמה, גרירה, תצוגה מקדימה ושליחה ב-WhatsApp — בלי לשנות את ה-form. -->
+<body data-enhance-file-inputs>
+<div class="wrap">
+
+  <h1>העלאת תמונות + שליחה ב-WhatsApp</h1>
+  <p class="sub">צילום מהמצלמה, בחירה מהגלריה, גרירה או הדבקה — ושליחה למספר WhatsApp.</p>
+
+  <form class="card" id="report-form">
+    <h2>טופס דיווח</h2>
+
+    <div class="row">
+      <label for="name">שם מלא</label>
+      <input id="name" name="name" type="text" placeholder="ישראל ישראלי" required>
+    </div>
+
+    <div class="row">
+      <label for="site">מיקום / אתר</label>
+      <input id="site" name="site" type="text" placeholder="רחוב הרצל 10, תל אביב">
+    </div>
+
+    <!-- 1. שדה קיים בקובץ HTML — משודרג אוטומטית, וממשיך להישלח עם ה-form -->
+    <div class="row">
+      <label for="photos">תמונות מהשטח</label>
+      <input id="photos" name="photos[]" type="file" accept="image/*" multiple>
+    </div>
+
+    <button class="submit" type="submit">שלח טופס</button>
+    <p class="sub" id="result" style="margin:12px 0 0"></p>
+  </form>
+
+  <!-- 2. הצבה מפורשת: הווידג'ט נבנה מאפס במקום שבו רוצים אותו -->
+  <div class="card">
+    <h2>מסמכים נלווים (הצבה מפורשת)</h2>
+    <div data-image-upload
+         data-label="חשבוניות וקבלות"
+         data-max="6"
+         data-max-dim="1400"
+         data-message="שלום, מצורפות החשבוניות מהדיווח."
+         data-dial="972"
+         data-name="invoices"></div>
+  </div>
+
+  <div class="card">
+    <h2>איך מחברים לקובץ HTML קיים</h2>
+    <pre><code>&lt;script src="whatsapp-image-upload.js"&gt;&lt;/script&gt;
+
+&lt;!-- א. שדרוג כל שדות התמונה הקיימים בדף --&gt;
+&lt;body data-enhance-file-inputs&gt;
+
+&lt;!-- ב. או הצבה נקודתית בדיוק במקום הרצוי --&gt;
+&lt;div data-image-upload data-label="תמונות" data-max="10"&gt;&lt;/div&gt;</code></pre>
+  </div>
+
+</div>
+
+<script src="whatsapp-image-upload.js"></script>
+<script>
+  // הקבצים נכתבים חזרה ל-input.files, כך ש-FormData עובד כרגיל
+  document.getElementById('report-form').addEventListener('submit', function (e) {
+    e.preventDefault();
+    var fd = new FormData(this);
+    var count = fd.getAll('photos[]').filter(function (f) { return f && f.size; }).length;
+    document.getElementById('result').textContent =
+      'הטופס נשלח (דמו) עם ' + count + ' תמונות מצורפות.';
+  });
+
+  // אירוע בכל שינוי ברשימת התמונות
+  document.addEventListener('imageupload:change', function (e) {
+    console.log('תמונות:', e.detail.files);
+  });
+</script>
+</body>
+</html>
