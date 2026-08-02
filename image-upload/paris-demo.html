@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#1A2B48">
+<title>La découverte de Paris et son Histoire — Famille Segev</title>
+<style>
+:root{--navy:#1A2B48;--deep:#0F1925;--gold:#B8863B;--cream:#EDE8DC;--warm:#F7F4EF;--line:#D8D2C4;--teal:#2E6B63;--grey:#6B6B6B}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{margin:0;background:var(--warm);color:var(--deep);
+ font-family:"Heebo",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;font-size:16px;line-height:1.55}
+header.top{position:sticky;top:0;z-index:40;background:var(--navy);color:#fff;
+ padding:calc(env(safe-area-inset-top) + 10px) 14px 10px;border-bottom:3px solid var(--gold)}
+header.top h1{margin:0;font-size:15px;letter-spacing:.5px;font-weight:800}
+header.top p{margin:2px 0 0;font-size:11.5px;color:#AFBCCF}
+nav.days{display:flex;gap:6px;overflow-x:auto;padding:9px 12px;background:#16253E;
+ position:sticky;top:0;z-index:39;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+nav.days::-webkit-scrollbar{display:none}
+nav.days button{flex:0 0 auto;background:transparent;border:1px solid #40567D;color:#C7D2E2;
+ padding:7px 13px;border-radius:20px;font-size:13px;font-weight:600;cursor:pointer}
+nav.days button.on{background:var(--gold);border-color:var(--gold);color:#fff}
+.wrap{max-width:820px;margin:0 auto;padding:0 12px 90px}
+
+/* --- bandeau de jour avec monument en fond --- */
+.dayhead{position:relative;overflow:hidden;border-radius:14px;margin:16px 0 6px;
+ background:linear-gradient(135deg,#1A2B48 0%,#22375C 55%,#16253E 100%);color:#fff;padding:20px 18px 22px}
+.dayhead svg{position:absolute;right:-10px;bottom:-18px;height:150%;opacity:.16;pointer-events:none}
+.dayhead .dd{font-size:11.5px;letter-spacing:1.6px;color:#C9B98F;font-weight:700;text-transform:uppercase}
+.dayhead h2{margin:5px 0 4px;font-size:27px;line-height:1.12;font-weight:800;position:relative}
+.dayhead .sub{font-size:13px;color:#AFBCCF;position:relative}
+.demihead{margin:20px 0 10px;padding:9px 13px;background:var(--navy);color:#fff;border-radius:9px}
+.demihead .t{font-size:12px;letter-spacing:1.3px;font-weight:800;color:#C9B98F}
+.demihead .h{font-size:13.5px;margin-top:2px}
+.demihead.souv{background:linear-gradient(135deg,#6B4E8C 0%,#4A3663 100%)}
+.demihead.souv .t{color:#E0D0F0}
+.mband.souv{background:#6B4E8C}
+.demihead.teal{background:var(--teal)}
+.demihead.teal .t{color:#BFE0D9}
+
+/* --- moment --- */
+.moment{background:#fff;border:1px solid var(--line);border-radius:13px;margin:0 0 14px;overflow:hidden}
+.mband{display:flex;gap:10px;align-items:baseline;background:var(--gold);color:#fff;padding:8px 13px}
+.mband.teal{background:var(--teal)} .mband.grey{background:#8A93A3}
+.mband .hh{font-weight:800;font-size:13px;flex:0 0 auto}
+.mband .tt{font-weight:600;font-size:13.5px}
+.mcap{padding:9px 13px 0;font-size:12.8px;color:var(--grey);font-style:italic;line-height:1.45}
+.slots{display:grid;grid-template-columns:1fr 1fr;gap:9px;padding:11px 13px 13px}
+.slot{position:relative;aspect-ratio:4/3;background:#FAF8F4;border:1.5px dashed var(--line);
+ border-radius:9px;display:flex;flex-direction:column;align-items:center;justify-content:center;
+ cursor:pointer;overflow:hidden;transition:border-color .15s}
+.slot:active{border-color:var(--gold)}
+.slot img{width:100%;height:100%;object-fit:cover;display:block}
+.slot .ico{font-size:26px;opacity:.32}
+.slot .lbl{font-size:11px;color:var(--grey);margin-top:5px;opacity:.85}
+.slot.full{border-style:solid;border-color:var(--line)}
+.del{position:absolute;top:5px;right:5px;width:27px;height:27px;border-radius:50%;
+ background:rgba(15,25,37,.72);color:#fff;border:0;font-size:15px;line-height:27px;
+ display:none;cursor:pointer;padding:0}
+.slot.full .del{display:block}
+/* --- à partir d'ici : reconstitution (le CSS collé était coupé) --- */
+.count{position:absolute;bottom:5px;left:6px;background:rgba(15,25,37,.6);color:#fff;
+ font-size:10px;padding:2px 6px;border-radius:9px;font-weight:600}
+footer.end{text-align:center;color:var(--grey);font-size:12px;padding:24px 12px}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <h1>LA DÉCOUVERTE DE PARIS ET SON HISTOIRE</h1>
+  <p>Famille Segev — carnet de voyage</p>
+</header>
+
+<nav class="days">
+  <button class="on">Jour 1</button>
+  <button>Jour 2</button>
+  <button>Jour 3</button>
+</nav>
+
+<div class="wrap">
+
+  <section class="dayhead">
+    <div class="dd">Lundi 4 août</div>
+    <h2>Jour 1 — Le cœur historique</h2>
+    <div class="sub">Île de la Cité, Notre-Dame, Quartier Latin</div>
+  </section>
+
+  <div class="demihead">
+    <div class="t">MATIN</div>
+    <div class="h">Départ 8h30 — métro ligne 4</div>
+  </div>
+
+  <article class="moment">
+    <div class="mband"><span class="hh">09:00</span><span class="tt">Notre-Dame de Paris</span></div>
+    <p class="mcap">Chef-d'œuvre du gothique, commencée en 1163 sous Maurice de Sully.</p>
+    <div class="slots">
+      <div class="slot" data-slot-id="j1-notredame-1"><div class="ico">📷</div><div class="lbl">Façade ouest</div></div>
+      <div class="slot" data-slot-id="j1-notredame-2"><div class="ico">📷</div><div class="lbl">Les gargouilles</div></div>
+    </div>
+  </article>
+
+  <article class="moment">
+    <div class="mband teal"><span class="hh">11:30</span><span class="tt">Sainte-Chapelle</span></div>
+    <p class="mcap">Les vitraux du XIIIe siècle, 1113 scènes bibliques.</p>
+    <div class="slots">
+      <div class="slot" data-slot-id="j1-chapelle-1"><div class="ico">📷</div><div class="lbl">Les vitraux</div></div>
+      <div class="slot" data-slot-id="j1-chapelle-2"><div class="ico">📷</div><div class="lbl">La voûte</div></div>
+    </div>
+  </article>
+
+  <div class="demihead teal">
+    <div class="t">APRÈS-MIDI</div>
+    <div class="h">Déjeuner puis Quartier Latin</div>
+  </div>
+
+  <article class="moment">
+    <div class="mband grey"><span class="hh">14:00</span><span class="tt">Le Panthéon</span></div>
+    <div class="slots">
+      <div class="slot" data-slot-id="j1-pantheon-1"><div class="ico">📷</div><div class="lbl">Le dôme</div></div>
+      <div class="slot" data-slot-id="j1-pantheon-2"><div class="ico">📷</div><div class="lbl">La crypte</div></div>
+    </div>
+  </article>
+
+  <section class="dayhead">
+    <div class="dd">Mardi 5 août</div>
+    <h2>Jour 2 — Le Paris royal</h2>
+    <div class="sub">Louvre, Tuileries, Concorde</div>
+  </section>
+
+  <article class="moment">
+    <div class="mband"><span class="hh">09:30</span><span class="tt">Musée du Louvre</span></div>
+    <p class="mcap">Ancienne forteresse de Philippe Auguste, devenue palais puis musée en 1793.</p>
+    <div class="slots">
+      <div class="slot" data-slot-id="j2-louvre-1"><div class="ico">📷</div><div class="lbl">La Pyramide</div></div>
+      <div class="slot" data-slot-id="j2-louvre-2"><div class="ico">📷</div><div class="lbl">La Joconde</div></div>
+      <div class="slot" data-slot-id="j2-louvre-3"><div class="ico">📷</div><div class="lbl">Victoire de Samothrace</div></div>
+      <div class="slot" data-slot-id="j2-louvre-4"><div class="ico">📷</div><div class="lbl">Cour Marly</div></div>
+    </div>
+  </article>
+
+  <div class="demihead souv">
+    <div class="t">SOUVENIRS</div>
+    <div class="h">Les moments en famille</div>
+  </div>
+
+  <article class="moment">
+    <div class="mband souv"><span class="hh">18:00</span><span class="tt">Jardin des Tuileries</span></div>
+    <div class="slots">
+      <div class="slot" data-slot-id="j2-tuileries-1"><div class="ico">📷</div><div class="lbl">Photo de famille</div></div>
+      <div class="slot" data-slot-id="j2-tuileries-2"><div class="ico">📷</div><div class="lbl">Le bassin</div></div>
+    </div>
+  </article>
+
+</div>
+
+<footer class="end">Famille Segev · Paris 2026</footer>
+
+<script src="photo-slots.js"></script>
+</body>
+</html>
